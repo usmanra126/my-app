@@ -1,3 +1,4 @@
+import { element } from 'prop-types';
 import React,{useState} from 'react'
 
 export default function Textform(props) {
@@ -21,6 +22,7 @@ export default function Textform(props) {
   const handlecopy = () => {
     navigator.clipboard.writeText(text);
     //alert("Text copied successfully!");
+    props.showalert("copy text")
 }
 
 const[text,settext]=useState("enter the vlaue")
@@ -33,15 +35,15 @@ const[text,settext]=useState("enter the vlaue")
   <textarea className="form-control"  id="my box" rows="7" value={text} onChange={handleonchange}  ></textarea>
 
 </div>
-  <button className="btn btn-primary" onClick={handleupclick}>convert to uppercase</button>
+  <button className="btn btn-primary my-1 mx-1" onClick={handleupclick}>convert to uppercase</button>
 
-  <button className="btn btn-primary" onClick={lowercase}>convert lower case</button>
-  <button className="btn btn-primary" onClick={handlecopy}>copy text</button>
+  <button className="btn btn-primary my-1 mx-1" onClick={lowercase}>convert lower case</button>
+  <button className="btn btn-primary my-1 mx-1" onClick={handlecopy}>copy text</button>
 
   <div className="contaier">
     <p>summary text</p>
-    <h1>{text.split(" ").length}words and {text.length}character</h1>
-    <p>{0.008*text.split(" ").length}read time</p>
+    <h1>{text.split(/\s+/).filter((element)=>{return element.length!==0}).length}words and {text.length}character</h1>
+    <p>{0.008*text.split(" ").filter((element)=>{return element.length!==0}).length}read time</p>
   </div>
 
     </>

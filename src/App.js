@@ -5,7 +5,11 @@ import Alert from './component/Alert';
 import Navarbar from './component/Navarbar';
 import Textform from  './component/Textform';
 import React, { useState } from 'react';
-
+import{
+  HashRouter as Router,
+  Switch,
+  Route
+}from 'react-router-dom'
 
 
 
@@ -39,16 +43,21 @@ const showalert=(Message,type)=>{
   }
   return(
     <>
- 
+ <Router>
 <Navarbar homes="Address" mode={mode} togglemode={togglemode}></Navarbar>
 <Alert alert={alert}/>
 <div className='container my-3' >
-   <About about="About us"/>
-   <Textform showalert={showalert}headings="Enter the text"></Textform>
- 
-   
-  </div>
+  <Switch>
+  <Route exact path="/about">
+    <About about="About us"/>
+  </Route>
 
+  <Route exact path="/usman">
+    <Textform showalert={showalert} headings="Enter the text" />
+  </Route>
+</Switch>
+</div>
+</Router>
 </>
   );
 }
